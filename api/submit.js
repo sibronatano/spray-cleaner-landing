@@ -8,10 +8,13 @@ export default async function handler(req, res) {
     try {
         const order = { id: Date.now(), ...req.body, date: new Date().toISOString() };
 
-        if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+        const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+        const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+
+        if (url && token) {
             const redis = new Redis({
-                url: process.env.UPSTASH_REDIS_REST_URL,
-                token: process.env.UPSTASH_REDIS_REST_TOKEN,
+                url: url,
+                token: token,
             });
             await redis.lpush('spray_orders', order);
         }
