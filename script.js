@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 phone: document.getElementById('phone').value,
                 city: document.getElementById('city').value,
                 quantity: document.getElementById('quantity').value,
-                totalPrice: document.getElementById('quantity').value * 169
+                totalPrice: document.getElementById('quantity').value * 75
             };
 
             try {
